@@ -21,6 +21,9 @@ int procura_na_lista(struct cliente* lista, int ID);
 /* Extrai um nó da lista e o devolve para impressão/manipulação */
 struct cliente* extrai_cadastro(struct cliente* lista, int ind_encontrado);
 
+/* Trava fluxo do programa, afim de permitir leitura do usuário. */
+void press_s(void);
+
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções utilitárias. */
 // ----------------------------------------------------------------------------------------------------------------

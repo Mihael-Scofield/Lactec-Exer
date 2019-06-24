@@ -37,7 +37,6 @@ struct cliente* levantamento_de_dados() {
 	scanf(" %[^\n]s", novo_cliente->telefone);
 
 	novo_cliente->prox = NULL;
-	printf("\nObrigado! Estamos Adicionando o cadastro do cliente... \n\n");
 	return novo_cliente;
 }
 
@@ -73,15 +72,15 @@ struct cliente* extrai_cadastro(struct cliente* lista, int ind_encontrado) {
 	return lista_aux;
 }
 
-///* Trava fluxo do programa, afim de permitir leitura do usuário. */
-//void press_s(void) {
-//	char ch;
-//
-//	printf("\nPor favor, aperte 's' para sair\n");
-//	while (ch != 's') {
-//		scanf("%c", &ch)
-//	}
-//}
+/* Trava fluxo do programa, afim de permitir leitura do usuário. */
+void press_s(void) {
+	char ch;
+
+	printf("\nPor favor, aperte 's' para voltar ao menu inicial\n");
+	while (ch != 's') {
+		scanf("%c", &ch);
+	}
+}
 
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções utilitárias. */
@@ -107,24 +106,34 @@ void insere_hash(struct listaHash* hash, int *qnt) {
 
 	/* Casos distintos de inserção */
 	if (lista == NULL) { // Ainda não existe uma lista no índice atual;
+		/* Cadastramento */
 		hash[indice].head = novo_cliente; // Inicio a lista.
 		hash[indice].tail = novo_cliente;
 		*qnt += 1;
+
+		/* Interação com usuário */
+		system("clear");
 		printf("Usuario cadastrado com sucesso! \n");
-		sleep(2);
+		press_s();
 	}
 	else { // Já existe uma lista vinculada a esta posição.
 		int ind_encontrado;
 		ind_encontrado = procura_na_lista(lista, novo_cliente->ID); // Procuro se o cliente já existe na lista atual.
 		if (ind_encontrado == -1) { // Não encontrei, basta adicionar no final da lista.
+			/* Cadastramento */
 			hash[indice].tail->prox = novo_cliente;
 			hash[indice].tail = novo_cliente;
 			*qnt += 1;
+
+			/* Interação com usuário */
+			system("clear");
 			printf("Usuario cadastrado com sucesso! \n");
-			sleep(2);
+			press_s();
 		}
 		else {
-			printf("\nUsuário já existente nos cadastros. Não há necessidade de cadastra-lo. \n");
+			system("clear");
+			printf("Usuário já existente nos cadastros. Não há necessidade de cadastra-lo. \n");
+			press_s();
 		}
 	}
 }
@@ -150,16 +159,14 @@ void busca_hash(struct listaHash* hash) {
 	/* Busca propriamente dita */
 	if (lista == NULL) { // Não existe lista
 		printf("Cliente não encontrado \n");
-		printf("\nRetornando ao menu inicial...\n");
-		sleep(2);
+		press_s();
 		}
 	else { // Já existe uma lista vinculada a esta posição.
 		int ind_encontrado;
 		ind_encontrado = procura_na_lista(lista, ID_b); // Procuro cliente na lista.
 		if (ind_encontrado == -1) { // Não o encontrei
-			printf("Cliente não encontrado 2 ");
-			printf("\nRetornando ao menu inicial...\n");
-			sleep(2);
+			printf("Cliente não encontrado 2 \n");
+			press_s();
 		}
 		else { // Achei o cadastro do cliente, preciso extrair seus dados
 			/* Extração de informações. */
@@ -172,7 +179,7 @@ void busca_hash(struct listaHash* hash) {
 			printf("Nome: %s \n", cliente_buscado->nome);
 			printf("Idade: %d \n", cliente_buscado->idade);
 			printf("Telefone: %s \n", cliente_buscado->telefone);
-			sleep(4);	
+			press_s();	
 		}
 	}
 }

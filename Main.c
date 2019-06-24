@@ -42,14 +42,15 @@ int main (void) {
 
 			case 4:
 				printf("Usuário escolheu sair. \n");
+				sleep(3);
 				controle = 0; // Diz ao programa que deve encerrar.
 				break;
 
 			default:
 				printf("Opcao invalida, poderia digitar novamente uma das 4 opcoes? \n");
+				sleep(2);
 				break;		
 		} 
-		sleep(2);
 		system("clear");
 	} while (controle == 1);
 	return 0;
