@@ -33,8 +33,7 @@ int main (void) {
 				break;
 
 			case 2:
-				printf("Foi escolhido busca");
-				//busca_hash(hash);
+				busca_hash(hash);
 				break;
 
 			case 3:
