@@ -22,6 +22,8 @@ struct cliente* levantamento_de_dados() {
 	struct cliente* novo_cliente; // novo_cliente que sera cadastrado.
 	novo_cliente = (struct cliente*) malloc(sizeof(struct cliente));
 
+	system("clear");
+
 	printf("Por favor, digite a ID do cliente: \n");
 	scanf("%d", &novo_cliente->ID);
 	
@@ -35,7 +37,6 @@ struct cliente* levantamento_de_dados() {
 	scanf(" %[^\n]s", novo_cliente->telefone);
 
 	novo_cliente->prox = NULL;
-	printf("\nObrigado! Estamos Adicionando o cadastro do cliente... \n\n");
 	return novo_cliente;
 }
 
@@ -59,10 +60,31 @@ int procura_na_lista(struct cliente* lista, int ID) {
 	return -1; // Caso não tenha encontrado.
 }
 
+/* Extrai um nó da lista e o devolve para impressão/manipulação */
+struct cliente* extrai_cadastro(struct cliente* lista, int ind_encontrado) {
+	int i = 0;
+	struct cliente* lista_aux = lista; // Para não perder meu ponteiro de inicio/final da lista.
+	
+	while (i != ind_encontrado) {
+		lista_aux = lista_aux->prox;
+		i++; // Avanço até chegar no nó que desejo extrair
+	}
+	return lista_aux;
+}
+
+/* Trava fluxo do programa, afim de permitir leitura do usuário. */
+void press_s(void) {
+	char ch;
+
+	printf("\nPor favor, aperte 's' para voltar ao menu inicial\n");
+	while (ch != 's') {
+		scanf("%c", &ch);
+	}
+}
+
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções utilitárias. */
 // ----------------------------------------------------------------------------------------------------------------
-
 
 
 
@@ -84,28 +106,83 @@ void insere_hash(struct listaHash* hash, int *qnt) {
 
 	/* Casos distintos de inserção */
 	if (lista == NULL) { // Ainda não existe uma lista no índice atual;
+		/* Cadastramento */
 		hash[indice].head = novo_cliente; // Inicio a lista.
 		hash[indice].tail = novo_cliente;
-		*qnt += 1;	
+		*qnt += 1;
+
+		/* Interação com usuário */
+		system("clear");
+		printf("Usuario cadastrado com sucesso! \n");
+		press_s();
 	}
 	else { // Já existe uma lista vinculada a esta posição.
 		int ind_encontrado;
 		ind_encontrado = procura_na_lista(lista, novo_cliente->ID); // Procuro se o cliente já existe na lista atual.
 		if (ind_encontrado == -1) { // Não encontrei, basta adicionar no final da lista.
+			/* Cadastramento */
 			hash[indice].tail->prox = novo_cliente;
 			hash[indice].tail = novo_cliente;
 			*qnt += 1;
+
+			/* Interação com usuário */
+			system("clear");
+			printf("Usuario cadastrado com sucesso! \n");
+			press_s();
 		}
 		else {
-			printf("\nUsuário já existente nos cadastros. Não há necessidade de cadastra-lo. \n");
+			system("clear");
+			printf("Usuário já existente nos cadastros. Não há necessidade de cadastra-lo. \n");
+			press_s();
 		}
 	}
 }
 
-// /* Busca algum cliente cadastrado no sistema */
-// int busca_hash(struct listaHash* hash) {
-// 	
-// }
+/* Busca algum cliente cadastrado no sistema */
+void busca_hash(struct listaHash* hash) {
+	int ID_b, idade_b; // ID e Idade a buscar.
+	
+	/* Levantamento de dados */
+	system("clear");
+	printf("Para buscar o cliente, por favor, digite o ID do cliente.\n");
+	scanf("%d", &ID_b);
+	printf("Agora, para agilizar a busca, por favor digite a idade do cliente. \n");
+	scanf("%d", &idade_b);
+	system("clear");
+	printf("Procurando... \n\n");
+
+	int indice = func_hash(idade_b); // Procura indice onde se encontra o cliente.
+
+	struct cliente* lista;
+	lista = (struct cliente*) hash[indice].head; // Extrai a lista da posição atual.
+
+	/* Busca propriamente dita */
+	if (lista == NULL) { // Não existe lista
+		printf("Cliente não encontrado \n");
+		press_s();
+		}
+	else { // Já existe uma lista vinculada a esta posição.
+		int ind_encontrado;
+		ind_encontrado = procura_na_lista(lista, ID_b); // Procuro cliente na lista.
+		if (ind_encontrado == -1) { // Não o encontrei
+			printf("Cliente não encontrado 2 \n");
+			press_s();
+		}
+		else { // Achei o cadastro do cliente, preciso extrair seus dados
+			/* Extração de informações. */
+			struct cliente* cliente_buscado;
+			cliente_buscado = extrai_cadastro(lista, ind_encontrado);
+
+			/* Impressão de informações */
+			printf("Cliente encontrado! Suas informações são: \n");
+			printf("ID: %d \n", cliente_buscado->ID);
+			printf("Nome: %s \n", cliente_buscado->nome);
+			printf("Idade: %d \n", cliente_buscado->idade);
+			printf("Telefone: %s \n", cliente_buscado->telefone);
+			press_s();	
+		}
+	}
+}
 
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções principais. */

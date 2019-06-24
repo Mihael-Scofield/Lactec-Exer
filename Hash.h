@@ -18,6 +18,12 @@ int func_hash(int chave);
 /* Procura um cliente na lista atual, retornando o indice de onde ele está ou -1 caso não se encontre. */
 int procura_na_lista(struct cliente* lista, int ID);
 
+/* Extrai um nó da lista e o devolve para impressão/manipulação */
+struct cliente* extrai_cadastro(struct cliente* lista, int ind_encontrado);
+
+/* Trava fluxo do programa, afim de permitir leitura do usuário. */
+void press_s(void);
+
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções utilitárias. */
 // ----------------------------------------------------------------------------------------------------------------
@@ -31,8 +37,8 @@ int procura_na_lista(struct cliente* lista, int ID);
 /* Função que faz o cadastro (inserção na tabela Hash) */
 void insere_hash(struct listaHash* hash, int *qnt);
 
-// /* Busca algum cliente cadastrado no sistema */
-//  int busca_hash(struct listaHash* hash);
+/* Busca algum cliente cadastrado no sistema */
+void busca_hash(struct listaHash* hash);
 
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções principais. */
