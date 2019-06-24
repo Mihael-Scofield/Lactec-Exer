@@ -3,6 +3,11 @@
 
 #include "Includes.h"
 
+// -----------------------------------------------------------------------------------------------------------------
+/* Início das funções utilitárias. */
+/* Possuem diversas chamadas e repetições ao longo do código */
+// -----------------------------------------------------------------------------------------------------------------
+
 /* Inicializa a tabela hash, setando todas as posições como vázia. */
 void inicia_hash(struct listaHash* hash) {
 	int i = 0;
@@ -54,8 +59,20 @@ int procura_na_lista(struct cliente* lista, int ID) {
 	return -1; // Caso não tenha encontrado.
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+/* Fim das funções utilitárias. */
+// ----------------------------------------------------------------------------------------------------------------
+
+
+
+
+// -----------------------------------------------------------------------------------------------------------------
+/* Início das funções principais. */
+/* São chamadas apenas uma vez, mas executam a demanda do fluxo do programa */
+// -----------------------------------------------------------------------------------------------------------------
+
 /* Função que faz o cadastro (inserção na tabela Hash) */
-void insere_hash(struct listaHash* hash, int qnt) {
+void insere_hash(struct listaHash* hash, int *qnt) {
 	struct cliente* novo_cliente; // Nó que será adicionado
 	novo_cliente = (struct cliente*) malloc(sizeof(struct cliente));
 	novo_cliente = levantamento_de_dados();
@@ -69,7 +86,7 @@ void insere_hash(struct listaHash* hash, int qnt) {
 	if (lista == NULL) { // Ainda não existe uma lista no índice atual;
 		hash[indice].head = novo_cliente; // Inicio a lista.
 		hash[indice].tail = novo_cliente;
-		qnt++;	
+		*qnt += 1;	
 	}
 	else { // Já existe uma lista vinculada a esta posição.
 		int ind_encontrado;
@@ -77,7 +94,7 @@ void insere_hash(struct listaHash* hash, int qnt) {
 		if (ind_encontrado == -1) { // Não encontrei, basta adicionar no final da lista.
 			hash[indice].tail->prox = novo_cliente;
 			hash[indice].tail = novo_cliente;
-			qnt++;
+			*qnt += 1;
 		}
 		else {
 			printf("\nUsuário já existente nos cadastros. Não há necessidade de cadastra-lo. \n");
@@ -85,10 +102,14 @@ void insere_hash(struct listaHash* hash, int qnt) {
 	}
 }
 
+// /* Busca algum cliente cadastrado no sistema */
+// int busca_hash(struct listaHash* hash) {
+// 	
+// }
 
-
-
-
+// -----------------------------------------------------------------------------------------------------------------
+/* Fim das funções principais. */
+// ----------------------------------------------------------------------------------------------------------------
 
 
 

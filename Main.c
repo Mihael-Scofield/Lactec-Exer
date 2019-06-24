@@ -29,12 +29,12 @@ int main (void) {
 
 		switch(escolha) { // Direcionamento do tratamento a Hash
 			case 1:
-				insere_hash(hash, qnt);
-				printf("quantidade: %d\n", qnt);
+				insere_hash(hash, &qnt);
 				break;
 
 			case 2:
-				printf("Foi escolhido busca. \n");
+				printf("Foi escolhido busca");
+				//busca_hash(hash);
 				break;
 
 			case 3:
