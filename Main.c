@@ -8,8 +8,10 @@
 int main (void) {
 	/* Inicialização da Hash. */
 	struct listaHash* hash;
-	hash = (struct listaHash*) malloc(MAX * sizeof(struct listaHash)); // Aponta para inicio do Vetor de tamanho MAX
+	hash = (struct listaHash*) malloc(MAX * sizeof(struct listaHash)); // Aponta para inicio da hash (Vetor de tamanho MAX)
 	inicia_hash(hash);
+	int qnt; // Quantidade de itens atuais na tabela
+	qnt = 0; 
 
 	/* Impressão do menu. */
 	int escolha, controle;
@@ -27,7 +29,8 @@ int main (void) {
 
 		switch(escolha) { // Direcionamento do tratamento a Hash
 			case 1:
-				printf("Foi escolhido cadastramento. \n");
+				insere_hash(hash, qnt);
+				printf("quantidade: %d\n", qnt);
 				break;
 
 			case 2:
