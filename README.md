@@ -4,8 +4,9 @@ Implementado por Mihael Scofield de Azevedo.
 
 ## Instalação
 O programa foi pensado para rodar no terminal do OS Linux, compilado com gcc.
+
 Para facilitar sua instalação, nos arquivos existe um Makefile.
-Pelo terminal, no diretório onde se encontra o programa, basta digitar "Make" que um executável chamado "Cadastramento" aparece.
+Pelo terminal, no diretório onde se encontra o programa, basta digitar "make" que um executável chamado "Cadastramento" aparece.
 
 ## Execução
 O programa é capaz de fazer inserção (cadastramento), busca e exclusão dentro de uma Tabela Hash Encadeada.
