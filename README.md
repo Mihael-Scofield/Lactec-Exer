@@ -1,2 +1,3 @@
-# Lactec-Exer
-Exercício do teste seletivo da Lactec
+# Lactec-Exer, Intermediário
+
+Tópicos 1 a 7, 9 e 13 devidamente implementados e testados!
