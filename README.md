@@ -28,7 +28,9 @@ O programa foi implementado em 4 arquivos diferentes
   
   - Hash.h/c
   
-  Faz a manipulação da Hash e interage com o usuário para levantar os dados necessários. Dividida em Funções Utilitárias (com operações curtas, mas com muitas repetições ao longo do código) e Funções Principais (com poucas chamadas, mas que utilizam as Funções Utilitárias para controlar o fluxo da manipulação da Tabela Hash.
+  Faz a manipulação da Hash e interage com o usuário para levantar os dados necessários. 
+  
+  Dividida em Funções Utilitárias (com operações curtas, mas com muitas repetições ao longo do código) e Funções Principais (com poucas chamadas, mas que utilizam as Funções Utilitárias para controlar o fluxo da manipulação da Tabela Hash.
   
   - Structs.h
   
