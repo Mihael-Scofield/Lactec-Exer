@@ -20,7 +20,7 @@ Para implementa-la, foi adotada a estratégia de utilizar um vetor, onde cada el
 O acesso de cada posição desse vetor, se dá pela função Hash (função modular), feita para separar por idade cada usuário.
 
 ### Divisão de Arquivos
-O programa foi implementado em 3 arquivos diferentes
+O programa foi implementado em 4 arquivos diferentes
 
   - Main.c 
   
