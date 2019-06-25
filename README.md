@@ -19,7 +19,18 @@ O acesso de cada posição desse vetor, se dá pela função Hash (função modu
 
 ### Divisão de Arquivos
 O programa foi implementado em 3 arquivos diferentes
-  - Main.c - Controla o fluxo do programa principal, impressão do menu principal e a chamada dos demais arquivos.
-  - Hash.h/c - Faz a manipulação da Hash e interage com o usuário para levantar os dados necessários.
-  - Structs.h - Contém as estruturas de dados utilizadas no programa.
-  - Includes.h - Faz a inclusão das bibliotecas, arquivos cabeçalhos e possue as Macros definidas no trabalho.
+  - Main.c 
+  
+  Controla o fluxo do programa principal, impressão do menu principal e a chamada dos demais arquivos.
+  
+  - Hash.h/c
+  
+  Faz a manipulação da Hash e interage com o usuário para levantar os dados necessários. Dividida em Funções Utilitárias (com operações curtas, mas com muitas repetições ao longo do código) e Funções Principais (com poucas chamadas, mas que utilizam as Funções Utilitárias para controlar o fluxo da manipulação da Tabela Hash.
+  
+  - Structs.h
+  
+  Contém as estruturas de dados utilizadas no programa.
+  
+  - Includes.h 
+  
+  Faz a inclusão das bibliotecas, arquivos cabeçalhos e possue as Macros definidas no trabalho.
