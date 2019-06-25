@@ -40,6 +40,9 @@ void insere_hash(struct listaHash* hash, int *qnt);
 /* Busca algum cliente cadastrado no sistema */
 void busca_hash(struct listaHash* hash);
 
+/* Remove os cadastros da tabela hash */
+void remove_hash(struct listaHash* hash);
+
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções principais. */
 // ----------------------------------------------------------------------------------------------------------------

@@ -158,14 +158,14 @@ void busca_hash(struct listaHash* hash) {
 
 	/* Busca propriamente dita */
 	if (lista == NULL) { // Não existe lista
-		printf("Cliente não encontrado \n");
+		printf("Cliente não encontrado. \n");
 		press_s();
 		}
 	else { // Já existe uma lista vinculada a esta posição.
 		int ind_encontrado;
 		ind_encontrado = procura_na_lista(lista, ID_b); // Procuro cliente na lista.
 		if (ind_encontrado == -1) { // Não o encontrei
-			printf("Cliente não encontrado 2 \n");
+			printf("Cliente não encontrado. 2 \n");
 			press_s();
 		}
 		else { // Achei o cadastro do cliente, preciso extrair seus dados
@@ -184,9 +184,79 @@ void busca_hash(struct listaHash* hash) {
 	}
 }
 
+/* Remove elementos da tabela hash */
+void remove_hash(struct listaHash* hash) {
+	int ID_b, idade_b; // ID e Idade a buscar.
+	
+	/* Levantamento de dados */
+	system("clear");
+	printf("Qual o ID do cliente que gostaria de excluir? \n");
+	scanf("%d", &ID_b);
+	printf("Agora, para agilizar a busca, por favor digite a idade do cliente. \n");
+	scanf("%d", &idade_b);
+	system("clear");
+	printf("Procurando... \n\n");
+
+	int indice = func_hash(idade_b); // Procura indice onde se encontra o cliente.
+
+	struct cliente* lista;
+	lista = (struct cliente*) hash[indice].head; // Extrai a lista da posição atual.	
+
+	/* Casos distintos de remoção */
+	if (lista == NULL) { // Não existe lista na posição atual.
+		printf("O cliente procurado não existe. \n");
+		press_s();
+	}
+	else { // Existe uma lista na posição atual da tabela
+		int ind_encontrado;
+		ind_encontrado = procura_na_lista(lista, ID_b);
+		if (ind_encontrado == -1) { // Cliente não encontrado na lista.
+			printf("O cliente procurado não existe. \n");
+			press_s();
+		}
+		else { // Está dentro dessa lista.
+			/* Casos de remoção de fila encadeada */
+			struct cliente *lista_aux = lista;
+
+			/* Se encontra na cabeça */
+			if (lista_aux->ID == ID_b) {
+				hash[indice].head = lista_aux->prox;
+				free(lista_aux);
+				printf("Cliente excluido com sucesso! \n");
+				press_s();
+				return;
+			}
+			
+			/* Está no meio/cauda da lista */
+			while (lista_aux->prox->ID != ID_b) { // Caminho até o prox. ser quem eu quero.
+				lista_aux = lista_aux->prox; // Não aponto para quem eu quero, pois ele pode ser a cauda
+			}
+			if (hash[indice].tail == lista_aux->prox) { // Está na cauda.
+				lista_aux->prox = NULL; // Excluo a cauda atual;
+				hash[indice].tail = lista_aux; // e aponto para onde estou.
+			}
+			else { // Está no meio da lista
+				free(lista_aux->prox);
+				lista_aux->prox = lista_aux->prox->prox; // Simplesmente "pulo", fazendo a exclusão.
+			}
+			printf("Cliente excluido com sucesso! \n");
+			press_s();
+		}
+	}
+}
+
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções principais. */
 // ----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
 
 

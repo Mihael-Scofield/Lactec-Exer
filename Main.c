@@ -37,12 +37,12 @@ int main (void) {
 				break;
 
 			case 3:
-				printf("Foi escolhido remocao. \n");
+				remove_hash(hash);
 				break;
 
 			case 4:
 				printf("Usuário escolheu sair. \n");
-				sleep(3);
+				sleep(2);
 				controle = 0; // Diz ao programa que deve encerrar.
 				break;
 
