@@ -158,14 +158,14 @@ void busca_hash(struct listaHash* hash) {
 
 	/* Busca propriamente dita */
 	if (lista == NULL) { // Não existe lista
-		printf("Cliente não encontrado \n");
+		printf("Cliente não encontrado. \n");
 		press_s();
 		}
 	else { // Já existe uma lista vinculada a esta posição.
 		int ind_encontrado;
 		ind_encontrado = procura_na_lista(lista, ID_b); // Procuro cliente na lista.
 		if (ind_encontrado == -1) { // Não o encontrei
-			printf("Cliente não encontrado 2 \n");
+			printf("Cliente não encontrado. 2 \n");
 			press_s();
 		}
 		else { // Achei o cadastro do cliente, preciso extrair seus dados
@@ -184,9 +184,128 @@ void busca_hash(struct listaHash* hash) {
 	}
 }
 
+/* Remove elementos da tabela hash */
+void remove_hash(struct listaHash* hash) {
+	int ID_b, idade_b; // ID e Idade a buscar.
+	
+	/* Levantamento de dados */
+	system("clear");
+	printf("Qual o ID do cliente que gostaria de excluir? \n");
+	scanf("%d", &ID_b);
+	printf("Agora, para agilizar a busca, por favor digite a idade do cliente. \n");
+	scanf("%d", &idade_b);
+	system("clear");
+	printf("Procurando... \n\n");
+
+	int indice = func_hash(idade_b); // Procura indice onde se encontra o cliente.
+
+	struct cliente* lista;
+	lista = (struct cliente*) hash[indice].head; // Extrai a lista da posição atual.	
+
+	/* Casos distintos de remoção */
+	if (lista == NULL) { // Não existe lista na posição atual.
+		printf("O cliente procurado não existe. \n");
+		press_s();
+	}
+	else { // Existe uma lista na posição atual da tabela
+		int ind_encontrado;
+		ind_encontrado = procura_na_lista(lista, ID_b);
+		if (ind_encontrado == -1) { // Cliente não encontrado na lista.
+			printf("O cliente procurado não existe. \n");
+			press_s();
+		}
+		else { // Está dentro dessa lista.
+			/* Casos de remoção de fila encadeada */
+			struct cliente *lista_aux = lista;
+
+			/* Se encontra na cabeça */
+			if (lista_aux->ID == ID_b) {
+				hash[indice].head = lista_aux->prox;
+				free(lista_aux);
+				printf("Cliente excluido com sucesso! \n");
+				press_s();
+				return;
+			}
+			
+			/* Está no meio/cauda da lista */
+			while (lista_aux->prox->ID != ID_b) { // Caminho até o prox. ser quem eu quero.
+				lista_aux = lista_aux->prox; // Não aponto para quem eu quero, pois ele pode ser a cauda
+			}
+			if (hash[indice].tail == lista_aux->prox) { // Está na cauda.
+				lista_aux->prox = NULL; // Excluo a cauda atual;
+				hash[indice].tail = lista_aux; // e aponto para onde estou.
+			}
+			else { // Está no meio da lista
+				free(lista_aux->prox);
+				lista_aux->prox = lista_aux->prox->prox; // Simplesmente "pulo", fazendo a exclusão.
+			}
+			printf("Cliente excluido com sucesso! \n");
+			press_s();
+		}
+	}
+}
+
+/* Função que faz a impressão da Hash, conforme solicitado pelo menu */
+void listar_clientes(struct listaHash* hash, int opcao) {
+	int verificador = 0; // Verifica se existem elementos na Hash.
+	struct cliente* lista_aux;
+
+	system("clear");
+
+	/* Aqui é feita a verificação de qual listagem deve ser feita, se é a rápida ou com ordenação.
+	 * Fiz aqui em cima, para economizar e evitar comparações dentro do laço, economizando processamento. */
+	if (opcao == 0) { // Listagem rápida escolhida
+		for (int i = 0; i < MAX; i++) {
+			lista_aux = hash[i].head; // Pego cabeça da lista atual;
+			if (lista_aux == NULL) { // Não há nada aqui
+				continue;
+			}
+			else { // Existem coisas a serem printadas na lista
+				verificador = 1;
+				while (lista_aux != NULL) { // Agora caminharei na lista
+					printf("ID: %d, Nome: %s \n", lista_aux->ID, lista_aux->nome);
+					lista_aux = lista_aux->prox;
+				}
+			}
+		}
+	}
+
+	else { // Listagem com Ordenação escolhida.
+		for (int i = 0; i < MAX; i++) {
+			lista_aux = hash[i].head; // Pego cabeça da lista atual;
+			if (lista_aux == NULL) { // Não há nada aqui
+				continue;
+			}
+			else { // Existem coisas a serem printadas na lista
+				verificador = 1;
+				while (lista_aux != NULL) { // Agora caminharei na lista
+					printf("ID: %d, Nome: %s, Idade: %d, Telefone: %s \n", lista_aux->ID, lista_aux->nome, lista_aux->idade, lista_aux->telefone);
+					lista_aux = lista_aux->prox;
+				}
+			}
+		}
+	}
+
+	if (verificador == 0) { // Não existem elementos na tabela
+		printf("Ainda nenhum cliente foi cadastrado na sistema. \n");
+	}
+
+	press_s();
+}
+
+
 // -----------------------------------------------------------------------------------------------------------------
 /* Fim das funções principais. */
 // ----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
 
 

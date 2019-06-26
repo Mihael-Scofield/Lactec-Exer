@@ -24,7 +24,9 @@ int main (void) {
 		printf( "\n1. Cadastramento de cliente;" // Menu propriamente dito.
 				"\n2. Busca de cliente;"
 				"\n3. Exclusao de cadastro;"
-				"\n4. Sair. \n\n");
+				"\n4. Listar clientes (maneira rápida);"
+				"\n5. Listar clientes (com ordenação);"
+				"\n6. Sair. \n\n");
 		scanf("%d", &escolha);
 
 		switch(escolha) { // Direcionamento do tratamento a Hash
@@ -37,14 +39,23 @@ int main (void) {
 				break;
 
 			case 3:
-				printf("Foi escolhido remocao. \n");
+				remove_hash(hash);
 				break;
 
 			case 4:
+				listar_clientes(hash, 0);
+				break;
+
+			case 5:
+				listar_clientes(hash, 1);
+				break;
+
+			case 6:
 				printf("Usuário escolheu sair. \n");
-				sleep(3);
+				sleep(2);
 				controle = 0; // Diz ao programa que deve encerrar.
 				break;
+
 
 			default:
 				printf("Opcao invalida, poderia digitar novamente uma das 4 opcoes? \n");
