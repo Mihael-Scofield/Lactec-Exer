@@ -40,3 +40,11 @@ O programa foi implementado em 4 arquivos diferentes
   - Includes.h 
   
   Faz a inclusão das bibliotecas, arquivos cabeçalhos e possue as Macros definidas no trabalho.
+  
+## Agradecimentos
+
+Gostaria de agradecer a Lactec pela oportunidade de poder fazer, não só este projeto, como também o teste seletivo. A experiência até aqui foi incrível e me proporcionou, não só motivação para seguir em frente com o meu curso (pois percebi o quão divertido/estressante/recompensador pode ser trabalhar com desenvolvimento de software), como também um aprendizado enorme. Minha caixa de ferramentas e soluções aumentou muito e foi ótimo poder aplicar na prática algo que só havia visto em teoria.
+
+Agradeço também ao apoio familiar e de meus amigos durante o desenvolvimento deste projeto, me deram um amparo emocional e motivacional fundamental para o término do projeto.
+
+Obrigado.
